@@ -1,0 +1,20 @@
+.small-card-board-container{
+    width: 300px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.product-info{
+    display: flex;
+    flex-direction: column;
+  
+}
+.product-info span{
+    justify-content: end;
+}
+
+#title-heart{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
