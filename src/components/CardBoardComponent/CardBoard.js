@@ -1,29 +1,20 @@
 import React from "react";
 import  "./cardBoard.css"
+import BigCard from "../BigCardComponent/BigCard";
 
 function CardBoard({sortedList}) {
-    
+
     return (
+
         <div className="card-board-container">
-            {sortedList.map((product,index) =>{
+
+            {sortedList.length ? sortedList.map((product,index) =>{
                 return (
-                    <div className="product-card" key={index}>
-                
-                <img alt={product.name}  onError={({ currentTarget }) => {
-                    currentTarget.onerror = null; 
-                    currentTarget.src="https://cdn.britannica.com/35/222035-050-C68AD682/makeup-cosmetics.jpg?q=60";
-                }} src={product.image_link}></img>
-                <div className="product-info">
-                    <div id="title-heart">
-                    <h4>{product.name}</h4>
-                    <span id="heart">&#9825;</span>
-                    {/* &#9829; */}
-                    </div>
-                    <p>{product.price ? product.price : "5.0" } usd</p>
-                </div>
-            </div>
+                    <BigCard product={product} key={index}/>
                 )
-            })}
+            }) : <div className="empty">
+                    <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                </div>}
         </div>
     )
 }

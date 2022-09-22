@@ -1,49 +1,44 @@
-import React from "react";
+import React, {useState} from "react";
 import CategoryList from "../CategoryListComponent/CategoryList";
 import CardBoard from "../CardBoardComponent/CardBoard";
 import {Route, Routes} from "react-router-dom"
 import SmallCardBoard from "../SmallCardBoardComponent/SmallCardBoard";
 import {Link} from "react-router-dom"
+import card from "../../images/card.png"
+import cardDisabled from "../../images/card-diabled.png"
+import small from "../../images/small.png"
+import smallDisabled from "../../images/small-disabled.png"
 
 
 function Concealer({cardList}) {
-    
     const sortedList = cardList.filter(c => c.category === "concealer")
+    const [bigCard, setBigCard] = useState(true)
+    const cardHandler =()=>{
+        setBigCard(!bigCard)
+    }
+    const nav = "concealer"
 
     return(
-        <div>
+        <div className="main-block">
             <header>
-                <h1>Shop</h1>
+                <Link to={'/'} style={{textDecoration:"none", color: "inherit"}} >
+                    <h1 className="shopLogo">Shop</h1>
+                </Link>
             </header>
+            
             <div className="body-container">
-                <CategoryList/>
+                <CategoryList nav={nav}/>
                 <div className="cards-container">
                     <div className="view-links">
                         <Link to={'/concealer'} style={{textDecoration:"none", color: "inherit"}} >
-                               <div className="two-img">
-                               <svg>
-                                    <rect width="9" height="20" style={{fill:"none", stroke: "black"}} />
-                                </svg>
-                                <svg>
-                                    <rect width="9" height="20" style={{fill:"none", stroke: "black"}} />
-                                </svg>
+                            <div onClick={cardHandler}>
+                               <img src={bigCard ? card : cardDisabled} alt="Card"/>
                             </div>
                         </Link>
                         <Link to={'/concealer/small'} style={{textDecoration:"none", color: "inherit"}} >
-                        <div className="four-img">
-                               <svg>
-                                    <rect width="9" height="9" style={{fill:"none", stroke: "#8B8B8B", strokeWidth:"1px"}}/>
-                                </svg>
-                                <svg>
-                                    <rect width="9" height="9" style={{fill:"none", stroke: "#8B8B8B", strokeWidth:"1px"}} />
-                                </svg>
-                                <svg>
-                                    <rect width="9" height="9" style={{fill:"none", stroke: "#8B8B8B", strokeWidth:"1px"}} />
-                                </svg>
-                                <svg>
-                                    <rect width="9" height="9" style={{fill:"none", stroke: "#8B8B8B", strokeWidth:"1px"}} />
-                                </svg>
-                            </div>
+                        <div onClick={cardHandler} >
+                            <img src={bigCard ? smallDisabled : small} alt="smallDisabled"/>
+                        </div>
                         </Link>
                     </div>
                 <Routes>
@@ -52,9 +47,9 @@ function Concealer({cardList}) {
                 </Routes>
                 </div>
             </div>
-            
-           
-                
+            <footer>
+                <h1 className="shopLogo">Shop</h1>
+            </footer> 
         </div>
     )
 }
